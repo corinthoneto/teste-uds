@@ -1,31 +1,31 @@
-# teste-uds
+# Teste Pŕatico UDS / Em: 18/06/2020
 
-## Project setup
+## Project setup / Colocando para funcionar
 
-### Clone o this repository
+### STEP 1: Clone this repository
 ```
 git clone https://github.com/corinthoneto/teste-uds.git
 
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### STEP 2: Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
-### Open in your browser:
+### STEP 3: Open in your browser:
 http://localhost:8080/
 
-### Compiles and minifies for production
+### (Optional): Compiles and minifies for production
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### (Optional): Lints and fixes files
 ```
 npm run lint
 ```
 
-### Customize configuration
+### (Optional): Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
