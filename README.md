@@ -1,5 +1,7 @@
 # Teste Pŕatico UDS / Em: 18/06/2020
 
+Foi usado o Mirage JS para fazer Mock dos dados e simular o endpoint (API)
+
 ## Project setup / Colocando para funcionar
 
 ### STEP 1: Clone this repository
