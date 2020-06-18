@@ -5,7 +5,6 @@
 ### Clone o this repository
 ```
 git clone https://github.com/corinthoneto/teste-uds.git
-```
 
 npm install
 ```
@@ -14,6 +13,9 @@ npm install
 ```
 npm run serve
 ```
+
+### Open in your browser:
+http://localhost:8080/
 
 ### Compiles and minifies for production
 ```
