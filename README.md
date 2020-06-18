@@ -8,6 +8,8 @@ Foi usado o Mirage JS para fazer Mock dos dados e simular o acesso a uma API.
 ```
 git clone https://github.com/corinthoneto/teste-uds.git
 
+enter the folder (entrar na pasta): teste-uds
+
 npm install
 ```
 
