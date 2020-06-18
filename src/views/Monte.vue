@@ -50,7 +50,7 @@
         
     </div>
     
-    <div class="fixed-bottom" style="margin-bottom: 10px; background-color: #d3d3d3;">
+    <div class="meuFooter">
         <strong>Valor Total:</strong> {{ new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorTotal) }} <br>
         <strong>Tempo de Preparo:</strong> {{ tempoTotal }} minutos
     </div>
@@ -149,13 +149,5 @@ export default {
 </script>
 
 <style>
-
-.topo_produto{
-    height: 260px; width: 100%;
-    
-    margin-bottom: 24px;
-    object-fit: cover;
-    border-radius: 4px;
-}
 
 </style>

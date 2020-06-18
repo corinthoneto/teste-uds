@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Monte from '../views/Monte.vue'
 import Personaliza from '../views/Personaliza.vue'
+import Confirma from '../views/Confirma.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ Vue.use(VueRouter)
     path: '/personaliza',
     name: 'Personaliza',    
     component: Personaliza
+  },
+  {
+    path: '/confirmacao',
+    name: 'Confirma',    
+    component: Confirma
   }
 ]
 

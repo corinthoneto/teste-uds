@@ -31,4 +31,25 @@
     }
   }
 }
+
+.topo_produto {
+    height: 160px; width: 100%;
+    
+    margin-top: -25px;
+    margin-bottom: 5px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.meuFooter{
+  margin-bottom: 0px; background-color: #d3d3d3; position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   
+   color: #00008B;
+   text-align: center;
+}
+
+
 </style>

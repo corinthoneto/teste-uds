@@ -19,6 +19,7 @@
         
         <div class="row">
             <div class="col m12 d12">
+                <form @submit.prevent="confirmaPasso2()">
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -29,24 +30,29 @@
                         </thead>
                         <tbody>
                         <tr v-for="adicional in adicionais" v-bind:key="adicional.id">
-                            <td>{{ adicional.descricao }}</td>
-                            <td><button type="button" class="btn btn-danger btn-sm">-</button> 0 <button type="button" class="btn btn-success btn-sm">+</button></td>
+                            <td>{{ adicional.descricao }} (+ {{ new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(adicional.valor) }})</td>
+                            <td><button type="button" class="btn btn-danger btn-sm" @click="subtraiQuantidade(adicional)">-</button> {{ adicional.quantidade }} <button type="button" class="btn btn-success btn-sm" @click="adicionaQuantidade(adicional)">+</button></td>
                         </tr>
                         </tbody>
                     </table>
-
                 </div>
+
+                <br>        
+
+                <button type="button" class="btn btn-secondary" @click="$router.go(-1)">Voltar</button> <span style="margin:5px;"></span>
+                <button type="submit" class="btn btn-primary">Avançar</button>
+                
+                </form>
             </div>
         </div>
 
-         <br>        
-
-        <button type="button" class="btn btn-secondary" @click="$router.go(-1)">Voltar</button> <span style="margin:5px;"></span>
-        <button type="submit" class="btn btn-primary">Avançar</button>
+         
 
     </div>
+
+    <br><br>
     
-    <div class="fixed-bottom" style="margin-bottom: 10px; background-color: #d3d3d3;">
+    <div class="meuFooter">
         <strong>Valor Total:</strong> {{ new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorTotal) }} <br>
         <strong>Tempo de Preparo:</strong> {{ tempoTotal }} minutos
     </div>
@@ -64,6 +70,7 @@ export default {
   data(){
       return{
           adicionais:[],
+          adicionaisSelecionados:[{id: 0, quantidade: 0, descricao: ""}],
           
           adicional: 0,
           valorTotal:0,
@@ -77,6 +84,11 @@ export default {
             //let saborEscolhido = JSON.parse(localStorage.getItem("saborEscolhido"))
             let tempoTotalParcial = JSON.parse(localStorage.getItem("tempoTotalParcial"))
             let valorTotalParcial = JSON.parse(localStorage.getItem("valorTotalParcial"))
+
+            /* Verifica se escolheu os itens opcionais do açaí */
+            if(!valorTotalParcial){
+                this.$router.push('/monte');
+            }
 
             this.valorTotal = valorTotalParcial
             this.tempoTotal = tempoTotalParcial
@@ -99,17 +111,42 @@ export default {
             .then(json => {
                 this.adicionais = json.adicionals
             })
-      },      
+      }, 
 
-      confirmaPasso1(){
-          if(this.tamanhoSelecionado.id > 0 && this.saborSelecionado.id > 0){
-              localStorage.setItem("tamanhoEscolhido", JSON.stringify(this.tamanhoSelecionado));
-              localStorage.setItem("saborEscolhido", JSON.stringify(this.saborSelecionado));
-              localStorage.setItem("tempoTotalParcial", JSON.stringify(this.tempoTotal));
-              this.$router.push('/personaliza');
-          }else{
-              alert("Tamanho e Sabor são obrigatórios!");
+      adicionaQuantidade(adicional){
+          adicional.quantidade++;
+
+          this.adicionaisSelecionados[adicional.id] = {id: adicional.id, quantidade: adicional.quantidade, descricao: adicional.descricao}
+
+          this.valorTotal = this.valorTotal + adicional.valor
+          this.tempoTotal = this.tempoTotal + adicional.tempoPreparo 
+
+      },
+
+      subtraiQuantidade(adicional){
+          adicional.quantidade--;
+          
+          if(adicional.quantidade < 0){
+              adicional.quantidade = 0
+              this.adicionaisSelecionados[adicional.id] = {id: adicional.id, quantidade: 0, descricao: adicional.descricao}
+              //this.adicionaisSelecionados.splice(adicional.id, 1);
+
+              return true
           }
+
+          this.adicionaisSelecionados[adicional.id] = {id: adicional.id, quantidade: adicional.quantidade, descricao: adicional.descricao}
+
+          this.valorTotal = this.valorTotal - adicional.valor
+          this.tempoTotal = this.tempoTotal - adicional.tempoPreparo
+
+      },
+
+      confirmaPasso2(){
+          localStorage.setItem("valorTotalParcial", JSON.stringify(this.valorTotal));
+          localStorage.setItem("tempoTotalParcial", JSON.stringify(this.tempoTotal));
+          localStorage.setItem("adicionaisSelecionados", JSON.stringify(this.adicionaisSelecionados));
+
+          this.$router.push('/confirmacao');
       }
 
 
@@ -118,13 +155,5 @@ export default {
 </script>
 
 <style>
-
-.topo_produto{
-    height: 260px; width: 100%;
-    
-    margin-bottom: 5px;
-    object-fit: cover;
-    border-radius: 10px;
-}
 
 </style>
