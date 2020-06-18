@@ -2,6 +2,12 @@
 
 ## Project setup
 ```
+
+### Clone o this repository
+```
+git clone https://github.com/corinthoneto/teste-uds.git
+```
+
 npm install
 ```
 
