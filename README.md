@@ -1,7 +1,6 @@
 # teste-uds
 
 ## Project setup
-```
 
 ### Clone o this repository
 ```
